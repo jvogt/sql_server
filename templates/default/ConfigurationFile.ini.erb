@@ -58,9 +58,11 @@ QUIETSIMPLE="False"
 
 X86="False"
 
+<% unless node['sql_server']['role'].nil? -%>
 ; Detailed help for command line argument ROLE has not been defined yet.
 
-ROLE="AllFeatures_WithDefaults"
+ROLE="<%= node['sql_server']['role'] %>"
+<% end -%>
 
 ; Detailed help for command line argument ENU has not been defined yet.
 
@@ -142,11 +144,11 @@ AGTSVCSTARTUPTYPE="<%= node['sql_server']['agent_startup'] %>"
 
 ; Startup type for Integration Services.
 
-ISSVCSTARTUPTYPE="Automatic"
+ISSVCSTARTUPTYPE="<%= node['sql_server']['issvc_startup'] %>"
 
 ; Account for Integration Services: Domain\User or system account.
 
-ISSVCACCOUNT="NT AUTHORITY\NetworkService"
+ISSVCACCOUNT="<%= node['sql_server']['issvc_account'] %>"
 
 ; Controls the service startup type setting after the service has been created.
 
