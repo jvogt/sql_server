@@ -34,9 +34,11 @@ INSTANCEID="<%= node['sql_server']['instance_name'] %>"
 
 ACTION="Install"
 
+<% unless node['sql_server']['feature_list'].blank? -%>
 ; Specifies features to install, uninstall, or upgrade. The list of top-level features include SQL, AS, RS, IS, and Tools. The SQL feature will install the database engine, replication, and full-text. The Tools feature will install Management Tools, Books online, Business Intelligence Development Studio, and other shared components.
 
 FEATURES=<%= node['sql_server']['feature_list'] %>
+<% end -%>
 
 ; Displays the command line parameters usage
 
@@ -58,7 +60,7 @@ QUIETSIMPLE="False"
 
 X86="False"
 
-<% unless node['sql_server']['role'].nil? -%>
+<% unless node['sql_server']['role'].blank? -%>
 ; Detailed help for command line argument ROLE has not been defined yet.
 
 ROLE="<%= node['sql_server']['role'] %>"
