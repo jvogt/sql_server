@@ -20,11 +20,7 @@
 
 Chef::Application.fatal!("node['sql_server']['server_sa_password'] must be set for this cookbook to run") if node['sql_server']['server_sa_password'].nil?
 
-service_name = if node['sql_server']['instance_name'] == 'SQLEXPRESS'
-                 "MSSQL$#{node['sql_server']['instance_name']}"
-               else
-                 node['sql_server']['instance_name']
-               end
+service_name =  node['sql_server']['instance_name'] == 'SQLEXPRESS' ?  node['sql_server']['instance_name'] : "MSSQL$#{node['sql_server']['instance_name']}"
 
 # Compute registry version based on sql server version
 reg_version = node['sql_server']['reg_version'] ||
